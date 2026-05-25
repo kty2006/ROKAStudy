@@ -9,7 +9,12 @@ class Program
         int n = input[0];
         int a = input[1];
         int b = input[2];
-        int count = b - 2;
+        int count = 0;
+        
+        while()
+        {
+            count = a > b ? a % b : b % a;
+        }
         
         if(count >= n)  
         {
@@ -18,6 +23,7 @@ class Program
           Console.Write(loofCount);
         }
         else
+        
         {
             Console.Write(count);
         }
