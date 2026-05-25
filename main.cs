@@ -9,16 +9,21 @@ class Program
         int n = input[0];
         int a = input[1];
         int b = input[2];
-        int count = 0;
-        
-        while()
+        int count = 1;
+        int gcd;
+         
+        if(b > a)
         {
-            count = a > b ? a % b : b % a;
+            (a,b) = (b,a);
         }
+
+        gcd = GCD(a,b);
+
+        count =  (a/gcd) -2;
         
         if(count >= n)  
         {
-          int loofCount  =  (count % n) == 0 ? 1 : count / n;
+          int loofCount  =  (count % n) == 0 ? n : count % n;
 
           Console.Write(loofCount);
         }
@@ -28,5 +33,18 @@ class Program
             Console.Write(count);
         }
 
+    }
+
+    public static int GCD(int a, int b)
+    {
+        int remain = 1;
+        while(remain != 0)
+        {
+            remain = a % b;
+            a = b;
+            b = remain;
+        }
+        // Console.WriteLine("GCD: {0}", a);
+        return a;
     }
 }
