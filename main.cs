@@ -6,45 +6,28 @@ class Program
     static void Main()
     {   
         int[] input = Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
-        int n = input[0];
-        int a = input[1];
-        int b = input[2];
-        int count = 1;
-        int gcd;
-         
-        if(b > a)
+        Dictionary<int,int> prices = new Dictionary<int, int>();
+        int all = input[1];
+        int lastParice;
+        int lastW;
+        for(int i = 0; i < input[0]; i++)
         {
-            (a,b) = (b,a);
+            int[] input_ = Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
+            prices.Add(input_[0],input_[1]);
         }
-
-        gcd = GCD(a,b);
-
-        count =  (a/gcd) -2;
         
-        if(count >= n)  
+        while(true)
         {
-          int loofCount  =  (count % n) == 0 ? n : count % n;
-
-          Console.Write(loofCount);
+            int i = 0;
+            int w = 0;
+            lastW = 0;
+            
+            lastParice = prices[i] + prices[i+1];
+            for(int o = 0; o <= 1; o++)
+            {
+                lastW += prices.FirstOrDefault(x => x.Value == prices[i+o]).Key;
+            }
         }
-        else
-        
-        {
-            Console.Write(count);
-        }
 
-    }
-
-    public static int GCD(int a, int b)
-    {
-        int remain = 1;
-        while(remain != 0)
-        {
-            remain = a % b;
-            a = b;
-            b = remain;
-        }
-        // Console.WriteLine("GCD: {0}", a);
-        return a;
     }
 }
