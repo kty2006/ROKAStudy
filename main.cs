@@ -1,31 +1,41 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main()
     {   
         int[] input = Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
-        Dictionary<int,int> prices = new Dictionary<int, int>();
+        Dictionary<int,(int,int)> prices = new Dictionary<int, (int, int)>();
         int all = input[1];
-        int lastParice;
-        int lastW;
+        int maxP = 0;
         for(int i = 0; i < input[0]; i++)
         {
             int[] input_ = Console.ReadLine().Split(" ").Select(int.Parse).ToArray();
-            prices.Add(input_[0],input_[1]);
+            prices.Add(i,(input_[0],input_[1]));
         }
         
-        while(true)
+        int maxWSum = prices.Values.Sum(x => x.Item1);
+        int maxPSum = prices.Values.Sum(x => x.Item2);
+        bool[] w = new bool[maxWSum + 1];
+        bool[] p = new bool[maxPSum + 1];
+        bool[] dp = new bool[1 << prices.Count];
+        dp[0] = true;
+
+        foreach(var price in prices.Values)
         {
-            int i = 0;
-            int w = 0;
-            lastW = 0;
-            
-            lastParice = prices[i] + prices[i+1];
-            for(int o = 0; o <= 1; o++)
+            for(int sum = maxPSum; sum >= price.Item2; sum--)
             {
-                lastW += prices.FirstOrDefault(x => x.Value == prices[i+o]).Key;
+
+                if (dp[sum - price.Item2])
+                {
+                  dp[sum] = true;
+                  int weight = prices.Values.Where(x => x.Item2 == sum).Select(x => x.Item1).FirstOrDefault();
+                  if(sum > maxP && price())
+                }
+                // dp[sum] = dp[sum] || dp[sum - price.Item2];
+                
             }
         }
 
